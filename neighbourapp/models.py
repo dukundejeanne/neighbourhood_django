@@ -35,7 +35,7 @@ class Profile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE,blank=True,related_name="profile")
     name=models.CharField(max_length=200,null=True,default="bio")
     email=models.EmailField(max_length=200,null=True)
-    
+
     location=models.CharField(max_length=100,null=True)
     neighborhood=models.ForeignKey(Neighbour, on_delete=models.CASCADE,null=True)
     def save_prof(self):
@@ -80,12 +80,13 @@ class Post(models.Model):
 
 class Business(models.Model):
     owner=models.CharField(max_length=40)
+    bussiness=models.CharField(max_length=200)
     location=models.ForeignKey(Neighbour, on_delete=models.CASCADE,null=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     # comment_image=models.ForeignKey(Project,on_delete=models.CASCADE,null=True)
     bussiness_email=models.EmailField(max_length=200,null=True)
     post_date=models.DateTimeField(auto_now_add=True)
-    bussiness=models.CharField(max_length=200)
+    
 
     def create_bussiness(self):
         self.save()
