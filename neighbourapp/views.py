@@ -101,9 +101,9 @@ def add_comment(request,image_id):
 
 def search_results(request):
 
-    if 'title' in request.GET and request.GET["title"]:
-        search_term = request.GET.get("title")
-        searched_title = Neighbour.search_by_title(search_term)
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_title =Business.search_by_business(search_term)
         message = f"{search_term}"
 
         return render(request, 'all_news/search.html',{"message":message,"users": searched_title})
@@ -159,31 +159,3 @@ def projects(request,id):
     
     return render(request,'one_project.html',{"projects":projects,"all":all,"form":form,"usability":aver_usability,"design":aver_design,"content":aver_content})
 
-# def newsletter(request):
-#     name = request.POST.get('your_name')
-#     email = request.POST.get('email')
-
-#     recipient = NewsLetterRecipients(name=name, email=email)
-#     recipient.save()
-#     send_welcome_email(name, email)
-#     data = {'success': 'You have been successfully added to mailing list'}
-#     return JsonResponse(data)
-
-# class MerchList(APIView):
-#     def get(self, request, format=None):
-#         all_merch = Project.objects.all()
-#         serializers = MerchSerializer(all_merch, many=True)
-#         return Response(serializers.data)
-#     def post(self, request, format=None):
-#         serializers = MerchSerializer(data=request.data)
-#         if serializers.is_valid():
-#             serializers.save()
-#             return Response(serializers.data, status=status.HTTP_201_CREATED)
-#         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-#     permission_classes = (IsAdminOrReadOnly,)
-# class MerchListProfile(APIView):
-#     def get(self, request, format=None):
-#         all_merch = Profile.objects.all()
-#         serializers = MerchSerializerProfile(all_merch, many=True)
-#         return Response(serializers.data)
-#     permission_classes = (IsAdminOrReadOnly,)
