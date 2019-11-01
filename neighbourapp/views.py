@@ -99,6 +99,23 @@ def add_post(request,image_id):
         form=PostForm()
     return render(request,'comment_form.html',{"form":form,"image_id":image_id})
 
+def add_business(request):
+    current_user=request.user
+    profile=Profile.objects.filter(user=user).first()
+    # all=Rates.objects.filter(project=id) 
+    if request.method == 'POST':
+        form = businessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = request.user
+          
+            rate.save()
+        return redirect('profilemy')
+    else:
+        form=businessForm()
+    return render(request,'business.html',{'form':form})
+    
+
 def search_results(request):
 
     if 'business' in request.GET and request.GET["business"]:
