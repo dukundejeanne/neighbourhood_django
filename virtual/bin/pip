@@ -1,4 +1,4 @@
-#!/home/wecode/neighbourhood/virtual/bin/python
+#!/home/wecode/neighbourhood_django/virtual/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

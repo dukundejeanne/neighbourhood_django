@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Project,Profile,Comment,Rates
+from .models import Neighbour,Profile,Comment,Rates
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from .forms import NewProjectForm,UpdatebioForm,CommentForm,VotesForm
+from .forms import NewNeighbourForm,UpdatebioForm,CommentForm,VotesForm
 from .email import send_welcome_email
 from .forms import NewsLetterForm
 # from rest_framework.response import Response
@@ -20,7 +20,7 @@ def home_images(request):
     # if request.GET.get('search_iterm'):
     #     pictures=Image.search(request.GET.get('search_iterm'))
     # else:
-    pictures=Project.objects.all()
+    pictures=Neighbour.objects.all()
     current_user=request.user
     myprof=Profile.objects.filter(id=current_user.id).first()
     comment=Comment.objects.filter(id=current_user.id).first()
@@ -40,7 +40,7 @@ def home_images(request):
 def new_image(request):
     current_user=request.user
     if request.method=='POST':
-        form=NewProjectForm(request.POST,request.FILES)
+        form=NewNeighbourForm(request.POST,request.FILES)
         if form.is_valid():
             image=form.save(commit=False)
             image.user=current_user
@@ -48,7 +48,7 @@ def new_image(request):
             # HttpResponseRedirect('hamePage')
         return redirect('homePage')
     else:
-        form=NewProjectForm()
+        form=NewNeighbourForm()
     return render(request,'registration/new_image.html',{"form":form})
 
 
@@ -56,10 +56,10 @@ def new_image(request):
 @login_required(login_url='/accounts/login/')
 def profilemy(request,username=None):
     current_user=request.user
-    pictures=Project.objects.filter(user=current_user)
+    pictures=Neighbour.objects.filter(user=current_user)
     if not username:
         username=request.user.username
-        images=Project.objects.filter(title=username)
+        images=Neighbour.objects.filter(title=username)
         # proc_img=Profile.objects.filter(user=current_user).first()
     return render(request,'profilemy.html',locals(),{"pictures":pictures})
 
@@ -85,7 +85,7 @@ def user_list(request):
 @login_required(login_url='/accounts/login/')     
 def add_comment(request,image_id):
     current_user=request.user
-    image_item=Project.objects.filter(id=image_id).first()
+    image_item=Neighbour.objects.filter(id=image_id).first()
     prof=Profile.objects.filter(user=current_user.id).first()
     if request.method=='POST':
         form=CommentForm(request.POST,request.FILES)
@@ -103,7 +103,7 @@ def search_results(request):
 
     if 'title' in request.GET and request.GET["title"]:
         search_term = request.GET.get("title")
-        searched_title = Project.search_by_title(search_term)
+        searched_title = Neighbour.search_by_title(search_term)
         message = f"{search_term}"
 
         return render(request, 'all_news/search.html',{"message":message,"users": searched_title})
@@ -113,9 +113,9 @@ def search_results(request):
         return render(request, 'all_news/search.html',{"message":message})
         
 @login_required(login_url='/accounts/login/') 
-def likes(request,id,project_id):
+def likes(request,id,Neighbour_id):
     likes=1
-    image=Project.objects.get(id=id)
+    image=Neighbour.objects.get(id=id)
     image.likes=image.likes+1
     image.save()
     return redirect('homePage')
@@ -123,7 +123,7 @@ def likes(request,id,project_id):
 @login_required(login_url='/accounts/login/') 
 def projects(request,id):
     
-    projects=Project.objects.filter(id=id)
+    projects=Neighbour.objects.filter(id=id)
     all=Rates.objects.filter(project=id) 
     if request.method == 'POST':
         form = VotesForm(request.POST)
