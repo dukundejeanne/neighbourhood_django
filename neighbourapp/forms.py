@@ -1,4 +1,4 @@
-from .models import Neighbour,Comment,Profile,User,Rates
+from .models import Neighbour,Post,Profile,User,Rates
 from django import forms
 from django.forms import ModelForm,Textarea,IntegerField
 
@@ -10,10 +10,10 @@ class NewNeighbourForm(forms.ModelForm):
         #     'tags': forms.CheckboxSelectMultiple(),
         # }
 
-class CommentForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
-        model=Comment
-        exclude=['comment_image','posted_by','profile']
+        model=Post
+        exclude=['user','date_posted']
 
 class UpdatebioForm(forms.ModelForm):
     class Meta:
@@ -24,10 +24,10 @@ class VotesForm(forms.ModelForm):
         model=Rates
         fields=('design','usability','content')
 
-class ReviewForm(forms.ModelForm):
-    class Meta:
-        model=Comment
-        fields=('comment',)
+# class ReviewForm(forms.ModelForm):
+#     class Meta:
+#         model=Comment
+#         fields=('comment',)
 
 class NewsLetterForm(forms.Form):
     your_name=forms.CharField(label='First Name', max_length=40)

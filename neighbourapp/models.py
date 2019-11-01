@@ -4,16 +4,6 @@ from tinymce.models import HTMLField
 from django.core.validators import MaxValueValidator
 # Create your models here.
 class Neighbour(models.Model):
-    # title=models.CharField(max_length=30)
-    # description=models.TextField(max_length=300)
-    # image=models.ImageField(upload_to='images_galleries/')
-    # user=models.ForeignKey(User,on_delete=models.CASCADE, blank=True,related_name="images")
-    # # comments=models.TextField(blank=True)
-    # post = HTMLField(null=True)
-    # # comments=models.ForeignKey(Comment)
-    # likes=models.IntegerField(default=0)
-    # link=models.TextField(max_length=130)
-    # pub_date=models.DateTimeField(auto_now_add=True,null=True)
     name=models.CharField(max_length=30)
     location=models.TextField(max_length=300)
     image=models.ImageField(upload_to='images_galleries/')
@@ -45,7 +35,9 @@ class Profile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE,blank=True,related_name="profile")
     name=models.CharField(max_length=200,null=True,default="bio")
     email=models.EmailField(max_length=200,null=True)
-    neighborhood=models.ForeignKey(Neighbour,null=True)
+    
+    location=models.CharField(max_length=100,null=True)
+    neighborhood=models.ForeignKey(Neighbour, on_delete=models.CASCADE,null=True)
     def save_prof(self):
         self.save()
 
@@ -65,19 +57,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-class Comment(models.Model):
-    posted_by=models.ForeignKey(Profile, on_delete=models.CASCADE,null=True)
-    # comment_image=models.ForeignKey(Project,on_delete=models.CASCADE,null=True)
-    comment=models.CharField(max_length=20,null=True)
-
-    def save_com(self):
-        self.save()
-
-    def get_comment(self,id):
-        comments=Comment.objects.filter(image_id=id)
-        return comments
-    def __str__(self):
-        return self.posted_by
 
 class NewsLetterRecients(models.Model):
     name=models.CharField(max_length=30)

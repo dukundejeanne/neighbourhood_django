@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Neighbour,Profile,Comment,Rates
+from .models import Neighbour,Profile,Rates
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from .forms import NewNeighbourForm,UpdatebioForm,CommentForm,VotesForm
+from .forms import NewNeighbourForm,UpdatebioForm,PostForm,VotesForm
 from .email import send_welcome_email
 from .forms import NewsLetterForm
 # from rest_framework.response import Response
@@ -23,7 +23,7 @@ def home_images(request):
     pictures=Neighbour.objects.all()
     current_user=request.user
     myprof=Profile.objects.filter(id=current_user.id).first()
-    comment=Comment.objects.filter(id=current_user.id).first()
+    # comment=Comment.objects.filter(id=current_user.id).first()
     form=NewsLetterForm()
     # if request.method== 'POST':
     #     form=NewsLetterForm(request.POST or None)
@@ -34,7 +34,7 @@ def home_images(request):
     #         recipient.save()
     #         send_welcome_email(name,email)
     #         HttpResponseRedirect('home_images')
-    return render(request,'index.html',{"pictures":pictures,'letterForm':form,"comment":comment,"myprof":myprof})
+    return render(request,'index.html',{"pictures":pictures,'letterForm':form,"myprof":myprof})
 
 @login_required(login_url='/accounts/login/')
 def new_image(request):
@@ -56,10 +56,10 @@ def new_image(request):
 @login_required(login_url='/accounts/login/')
 def profilemy(request,username=None):
     current_user=request.user
-    pictures=Neighbour.objects.filter(user=current_user)
+    pictures=Neighbour.objects.filter(name=current_user)
     if not username:
         username=request.user.username
-        images=Neighbour.objects.filter(title=username)
+        images=Neighbour.objects.filter(name=username)
         # proc_img=Profile.objects.filter(user=current_user).first()
     return render(request,'profilemy.html',locals(),{"pictures":pictures})
 
@@ -83,20 +83,20 @@ def user_list(request):
     return render(request,'user_list.html',context)
 
 @login_required(login_url='/accounts/login/')     
-def add_comment(request,image_id):
+def add_post(request,image_id):
     current_user=request.user
     image_item=Neighbour.objects.filter(id=image_id).first()
-    prof=Profile.objects.filter(user=current_user.id).first()
+    # prof=Profile.objects.filter(user=current_user.id).first()
     if request.method=='POST':
-        form=CommentForm(request.POST,request.FILES)
+        form=PostForm(request.POST,request.FILES)
         if form.is_valid():
-            comment=form.save(commit=False)
-            comment.posted_by=prof
+            postform.save(commit=False)
+            comment.title=prof
             comment.comment_image=image_item
             comment.save()
             return redirect('homePage')
     else:
-        form=CommentForm()
+        form=PostForm()
     return render(request,'comment_form.html',{"form":form,"image_id":image_id})
 
 def search_results(request):
