@@ -101,15 +101,14 @@ def add_post(request,image_id):
 
 def add_business(request):
     current_user=request.user
-    profile=Profile.objects.filter(user=user).first()
+    buz=Business.objects.filter(user=user).first()
     # all=Rates.objects.filter(project=id) 
     if request.method == 'POST':
         form = businessForm(request.POST)
         if form.is_valid():
             business = form.save(commit=False)
-            business.user = request.user
-          
-            rate.save()
+            business.buz=buz
+            business.save()
         return redirect('profilemy')
     else:
         form=businessForm()

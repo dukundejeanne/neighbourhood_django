@@ -40,9 +40,8 @@
   </div> -->
       <div class="modal-body">
         <form action="{% url 'add_business' %}" method="POST">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <!-- <div class="form-group">
+       
+            <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Owner Name:</label>
                 <input type="text" class="form-control" id="recipient-name">
               </div>
@@ -53,14 +52,14 @@
           <div class="form-group">
             <label for="message-text" class="col-form-label">Email:</label>
             <textarea class="form-control" id="message-text"></textarea>
-          </div> -->
+          </div>
           <button type="button" class="btn btn-primary" href="{% url 'add_business' %}">Save</button>
         </form>
       </div>
-      <!-- <div class="modal-footer"> -->
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <!-- <button type="button" class="btn btn-primary" href="{% url 'add_business' %}">Save</button>
-      </div> -->
+      <<div class="modal-footer"> 
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+        <button type="button" class="btn btn-primary" href="{% url 'add_business' %}">Save</button>
+      </div>
     </div>
   </div>
 </div>
