@@ -12,14 +12,15 @@
   <div class="media-body">
   <div class="bodd">
   <h3 class="account-heading ml-4">{{user.username}}</h3>
-  <button class="btn btn-outline-primary"><a href="{% url 'profile_edit' %}">Edit Profile</a></button><a href="{% url 'homePage' %}" ><i class="fa fa-sun-o" style="font-size: 28px;color: black;"></i></a>
+  <button class="btn btn-outline-primary"><a href="{% url 'profile_edit' %}">Edit Profile</a></button><a href="{% url 'homePage' %}" ><i class="" style="font-size: 28px;color: black;"></i></a>
 </div>
-<button class="btn btn-outline-info"><a href="">Add Business</a></button><a href="{% url 'homePage' %}" ><i class="fa fa-sun-o" style="font-size: 28px;color: black;"></i></a>
-  
+ 
+<p class="text-secondary ml-4">Name:{{user.profile.name}}</p>
+<p class="text-secondary ml-4">Contact: {{user.profile.location}}</p>
   <p class="text-secondary ml-4">Email:{{user.email}}</p>
-  <p class="text-secondary ml-4">Bio:{{user.profile.bio}}</p>
-  <p class="text-secondary ml-4">Contact:{{user.profile.contact}}</p>
-  </div>
+  <button class="btn btn-outline-info"><a href="">Add Business</a></button><a href="{% url 'homePage' %}" ></a>
+  
+</div>
 </div>
 </div>
 </div>
