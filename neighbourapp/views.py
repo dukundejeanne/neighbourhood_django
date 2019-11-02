@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Neighbour,Profile,Rates
+from .models import Neighbour,Profile,Rates,Business
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -57,11 +57,12 @@ def new_image(request):
 def profilemy(request,username=None):
     current_user=request.user
     pictures=Neighbour.objects.filter(name=current_user)
+    business=Business.objects.filter(owner=current_user).all()
     if not username:
         username=request.user.username
         images=Neighbour.objects.filter(name=username)
         # proc_img=Profile.objects.filter(user=current_user).first()
-    return render(request,'profilemy.html',locals(),{"pictures":pictures})
+    return render(request,'profilemy.html',locals(),{"business":business,"pictures":pictures})
 
 @login_required(login_url='/accounts/login/')
 def profile_edit(request):
@@ -109,7 +110,7 @@ def add_business(request):
             business = form.save(commit=False)
             business.buz=buz
             business.save()
-        return redirect('profilemy')
+        return redirect(reverse('profilemy',args=[current_user.id]))
     else:
         form=businessForm()
     return render(request,'business.html',{'form':form})
