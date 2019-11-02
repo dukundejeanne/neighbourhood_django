@@ -9,36 +9,37 @@
                 
             {% for images in projects %}
             <img src="{{images.image.url}}" width="100%" height="450vh">
-            <p class="title">{{images.name}}</p>
+            
           
-            <div class="bt">
-            <button class="btn btn-outline-success" style="border-radius:25px;"><a href="{{images.link}}" style="color: white;">visite site</a></button>
+            <!-- <div class="bt">
+            <button class="btn btn-outline-success" style="border-radius:25px;"><a href="{{images.link}}" style="color: white;">Add Business</a></button>
            
        
-        </div>
+        </div> -->
        
         
         </div>
 </header>
 <br>
 <body>
-    <div class="row">
+        <div>
+                        <p class="title">{{images.location}}</p>
+        </div>
+    <div class="row" style="margin-left: 20%;">
         
         <div class="col-md-3" >
-                <h3>Content </h3><hr class="bg-default"><br><h4>{{content}}.0</h4>
+                <h3>Name </h3><hr class="bg-default"><br><h4>{{images.name}}</h4>
             </div><br>
             <div class="col-md-3"  >
-                    <h3>Usability  </h3><hr class="bg-default"><br><h4>{{usability}}.0</h4>
+                    <h3>Location  </h3><hr class="bg-default"><br><h4>{{images.location}}</h4>
             </div><br>
-            <div class="col-md-3" >
-                    <h3>Design</h3><hr class="bg-default"><br><h4 >{{design}}.0</h4>
-            </div>
+            
             </div>
             
    
    
     <a href="{{images.link}}" class="btn btn-pink btn-md pull-right" target="_blank"><i class="far fa-chevron-double-right"></i></a>
-    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Rating</button>
+    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Add Business</button>
             <br>
            
 <!-- not typed -->
@@ -65,37 +66,16 @@
 
 {% endfor %}
 </div>
-<div class="card comments">
-        <div class="card-header">
-                <h4>Total votes: {{all|length}}</h4>
-        </div>
-        <div class="list-group">
-                <ul class="list-group">
-                        {% if all %}
-                        <table id="comm" class="table">
-                                <th>Voters</th>
-                                <th>Rates</th>
-                                {% for one in all %}
-                                <tr>
-                                        <td><img src="{{one.user.profile.profile_pic.url}}" alt="" width="30px" height="30px">{{one.user}}</td>
-                                        <td>
-                                                <div class="design">
-                                                        <a href="" class="scores"> {{one.design}}</a>
-                                                        <a href="" > {{one.usability}}</a>
-                                                        <a href="" class="b"> {{one.content}}</a>
-                                                </div>
-                                        </td>
-                                </tr>
-                                {% endfor %}
-                        </table>
-                        {% else %}
-                                <li class="list-group-item alert alert-info">No votes Available</li>
-                                {% endif %}
-                        </ul>
-        </div>
+
 </div>
 </div>
 </div>
+<div>
+        {% for ones in business %}
+        <p>{{ones.name}}</p>
+        <p>{{ones.location}}</p>
+        {% endfor %}
+
 </div>
 </body>
 
@@ -120,12 +100,13 @@
     
     .title{
         position:absolute;
-        top:50%;
+        text-align: center;
+        /* top:50%;
         left:30%;
-        transform: translate(-50%,-50%);
-        color:white;
+        transform: translate(-50%,-50%); */
+        color:black;
         font-size:50px;
-        font-family:'Grand Hotel',cursive ;
+        font-family:cursive ;
     }
     .bt{
       position: absolute;

@@ -16,10 +16,11 @@ from .forms import NewsLetterForm
 
 # display images
 @login_required(login_url='/accounts/login/')
-def home_images(request):
+def home_images(request,):
     # if request.GET.get('search_iterm'):
     #     pictures=Image.search(request.GET.get('search_iterm'))
     # else:
+   
     pictures=Neighbour.objects.all()
     current_user=request.user
     myprof=Profile.objects.filter(id=current_user.id).first()
@@ -139,9 +140,11 @@ def likes(request,id,Neighbour_id):
 
 @login_required(login_url='/accounts/login/') 
 def projects(request,id):
-    
-    projects=Neighbour.objects.filter(id=id)
-    all=Rates.objects.filter(project=id) 
+    user=request.user
+    projects=Neighbour.objects.all()
+    business=Business.objects.filter(id=id)
+    buz=Business.objects.filter(user=user).first()
+    all=Rates.objects.filter(project=id)  
     if request.method == 'POST':
         form = VotesForm(request.POST)
         if form.is_valid():
@@ -174,5 +177,5 @@ def projects(request,id):
             aver_design=0.0
             aver_content=0.0
     
-    return render(request,'one_project.html',{"projects":projects,"all":all,"form":form,"usability":aver_usability,"design":aver_design,"content":aver_content})
+    return render(request,'one_project.html',{"projects":projects,"all":all,"form":form,"usability":aver_usability,"design":aver_design,"content":aver_content,"buz":buz,"business":business})
 

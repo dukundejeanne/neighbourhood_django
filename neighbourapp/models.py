@@ -16,7 +16,7 @@ class Neighbour(models.Model):
         self.delete()
    
     @classmethod
-    def find_by_id(cls,id):
+    def filter_by_busines_id(cls,id):
         hood=cls.objects.filter(id=id)
         return hood 
 
