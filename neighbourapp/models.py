@@ -90,13 +90,13 @@ class Business(models.Model):
 
     def create_bussiness(self):
         self.save()
-        
+
     def delete_bussiness(self):
         self.save()
 
     @classmethod
     def search_by_business(cls,search_term):
-        search_term=cls.objects.filter(business__icontains=search_term)
+        search_term=cls.objects.filter(bussiness__icontains=search_term)
         return search_term
     def __str__(self):
         return self.owner
