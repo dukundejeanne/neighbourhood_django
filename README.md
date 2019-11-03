@@ -1,12 +1,14 @@
 # neighbourhood_django
 Your Job is to create a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts.
 
-##Getting Started
+## Getting Started
 Tag to create project:
 * mkdir awward_django create folder to hold all your application
 * cd awward_django 
 * django-admin startproject award . Tag to create a project application
 * django-admin startapp awardapp  tah to create the application
+## Prerequisites
+What things you need to install the software and how to install them
 install all this command in terminal pip
 
 * python3.6 -m venv  --without-pip virtual
@@ -26,30 +28,14 @@ install all this command in terminal pip
  pip install django==1.11
 CREATE DATABASE neighbour;
 ALTER USER wecode PASSWORD '12';
-Prerequisites
-What things you need to install the software and how to install them
 
-Give examples
-Installing
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-Give the example
-And repeat
-
-until finished
-End with an example of getting some data out of the system or using it for a little demo
-
-Running the tests
+## Running the tests
 Explain how to run the automated tests for this system
+in able to run this application you need first to run the server by using:  
+* python3.6 manage.py runserver 
+* brouser 
+* install Django
 
-Break down into end to end tests
-Explain what these tests test and why
-
-Give an example
-And coding style tests
-Explain what these tests test and why
 
 Give an example
 Deployment
@@ -65,14 +51,14 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 Versioning
 We use SemVer for versioning. For the versions available, see the tags on this repository.
 
-Authors
-Billie Thompson - Initial work - PurpleBooth
-See also the list of contributors who participated in this project.
+# Authors
 
-License
+Dukunde Marie Jeanne in November 2019
+
+# License
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
-Acknowledgments
+# Acknowledgments
 Hat tip to anyone whose code was used
 Inspiration
 etc
