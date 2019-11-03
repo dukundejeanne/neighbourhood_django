@@ -74,12 +74,12 @@ def add_business(request):
 def profilemy(request,username=None):
     current_user=request.user
     pictures=Neighbour.objects.filter(name=current_user)
-    business=Business.objects.all()
+    busines=Business.objects.all()
     if not username:
         username=request.user.username
         images=Neighbour.objects.filter(name=username)
         # proc_img=Profile.objects.filter(user=current_user).first()
-    return render(request,'profilemy.html',locals(),{"business":business,"pictures":pictures})
+    return render(request,'profilemy.html',locals(),{"busines":busines,"pictures":pictures})
 
 @login_required(login_url='/accounts/login/')
 def profile_edit(request):
@@ -159,7 +159,7 @@ def projects(request,id):
     user=request.user
     projects=Neighbour.objects.filter(id=id)
 
-    buz=Business.objects.filter(user=user).first()
+    buz=Business.objects.all()
     all=Rates.objects.filter(project=id)  
     if request.method == 'POST':
         form = VotesForm(request.POST)
