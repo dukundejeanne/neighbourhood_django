@@ -14,14 +14,17 @@ class PostForm(forms.ModelForm):
     class Meta:
         model=Post
         exclude=['user','date_posted']
+        
 class BusinessForm(forms.ModelForm):
     class Meta:
         model=Business
         exclude=['user','post_date']
+
 class UpdatebioForm(forms.ModelForm):
     class Meta:
         model=Profile
         exclude=['user','followers','following']
+
 class VotesForm(forms.ModelForm):
     class Meta:
         model=Rates

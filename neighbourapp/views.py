@@ -41,7 +41,7 @@ def home_images(request,):
 def new_image(request):
     current_user=request.user
     if request.method=='POST':
-        form=NewNeighbourForm(request.POST,request.FILES)
+        form=BusinessForm(request.POST,request.FILES)
         if form.is_valid():
             image=form.save(commit=False)
             image.user=current_user
@@ -49,10 +49,25 @@ def new_image(request):
             # HttpResponseRedirect('hamePage')
         return redirect('homePage')
     else:
-        form=NewNeighbourForm()
+        form=BusinessForm()
     return render(request,'registration/new_image.html',{"form":form})
 
-
+@login_required(login_url='/accounts/login/')
+def add_business(request):
+    current_user=request.user
+    # buz=Business.objects.filter(user=user).first()
+    # all=Rates.objects.filter(project=id) 
+    if request.method == 'POST':
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.location=location
+            business.save()
+        # return redirect('business')
+        return redirect(reverse('business',args=[current_user.id]))
+    else:
+        form=BusinessForm()
+    return render(request,'business.html',{"form":form})
 
 @login_required(login_url='/accounts/login/')
 def profilemy(request,username=None):
@@ -101,22 +116,7 @@ def add_post(request,image_id):
         form=PostForm()
     return render(request,'comment_form.html',{"form":form,"image_id":image_id})
 
-@login_required(login_url='/accounts/login/')
-def add_business(request):
-    current_user=request.user
-    # buz=Business.objects.filter(user=user).first()
-    # all=Rates.objects.filter(project=id) 
-    if request.method == 'POST':
-        form = BusinessForm(request.POST, request.FILES)
-        if form.is_valid():
-            business = form.save(commit=False)
-            business.location=location
-            business.save()
-        return redirect('business')
-        # return redirect(reverse('profilemy',args=[current_user.id]))
-    else:
-        form=BusinessForm()
-    return render(request,'business.html',{"form":form})
+
  
     # current_user = request.user
     # if request.method == 'POST':

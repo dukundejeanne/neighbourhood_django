@@ -52,7 +52,7 @@
                 </div>
                 <div class="modal-body mx-3">
                         <div class="form animated slideInDown">
-                                <form action="{% url 'business' %}" method="POST">
+                                <form action="{% url 'business' images.id %}" method="POST">
                                         {% csrf_token %}
                                         {% bootstrap_form form %}
                                         <button class="btn btn-outline-info modal-footer d-flex justify-content-center" type="submit">Submit </button>

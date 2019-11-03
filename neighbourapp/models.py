@@ -90,6 +90,7 @@ class Business(models.Model):
 
     def create_bussiness(self):
         self.save()
+        
     def delete_bussiness(self):
         self.save()
 
