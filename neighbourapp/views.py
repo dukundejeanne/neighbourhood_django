@@ -110,13 +110,13 @@ def add_business(request):
         form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
             business = form.save(commit=False)
-            business.buz=buz
+            business.location=location
             business.save()
-        return redirect('pro')
+        return redirect('business')
         # return redirect(reverse('profilemy',args=[current_user.id]))
     else:
         form=BusinessForm()
-    return render(request,'business.html',{'form':form})
+    return render(request,'business.html',{"form":form})
  
     # current_user = request.user
     # if request.method == 'POST':
@@ -170,5 +170,5 @@ def projects(request,id):
         return redirect('projects',id)       
     else:
         form = VotesForm() 
-    return render(request,'one_project.html',{"projects":projects,"buz":buz})
+    return render(request,'one_project.html',{"projects":projects,"buz":buz,"form":form})
 
