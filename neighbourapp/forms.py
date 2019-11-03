@@ -1,4 +1,4 @@
-from .models import Neighbour,Post,Profile,User,Rates
+from .models import Neighbour,Post,Profile,User,Rates,Business
 from django import forms
 from django.forms import ModelForm,Textarea,IntegerField
 
@@ -14,7 +14,10 @@ class PostForm(forms.ModelForm):
     class Meta:
         model=Post
         exclude=['user','date_posted']
-
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model=Business
+        exclude=['user','post_date']
 class UpdatebioForm(forms.ModelForm):
     class Meta:
         model=Profile

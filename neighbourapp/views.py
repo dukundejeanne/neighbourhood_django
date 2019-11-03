@@ -4,7 +4,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from .forms import NewNeighbourForm,UpdatebioForm,PostForm,VotesForm
+from .forms import NewNeighbourForm,UpdatebioForm,PostForm,VotesForm,BusinessForm
 from .email import send_welcome_email
 from .forms import NewsLetterForm
 # from rest_framework.response import Response
@@ -101,20 +101,35 @@ def add_post(request,image_id):
         form=PostForm()
     return render(request,'comment_form.html',{"form":form,"image_id":image_id})
 
+@login_required(login_url='/accounts/login/')
 def add_business(request):
     current_user=request.user
-    buz=Business.objects.filter(user=user).first()
+    # buz=Business.objects.filter(user=user).first()
     # all=Rates.objects.filter(project=id) 
     if request.method == 'POST':
-        form = businessForm(request.POST)
+        form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
             business = form.save(commit=False)
             business.buz=buz
             business.save()
-        return redirect(reverse('profilemy',args=[current_user.id]))
+        return redirect('pro')
+        # return redirect(reverse('profilemy',args=[current_user.id]))
     else:
-        form=businessForm()
+        form=BusinessForm()
     return render(request,'business.html',{'form':form})
+ 
+    # current_user = request.user
+    # if request.method == 'POST':
+    #     form = NewArticleForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         article = form.save(commit=False)
+    #         article.editor = current_user
+    #         article.save()
+    #     return redirect('NewsToday')
+
+    # else:
+    #     form = NewArticleForm()
+    # return render(request, 'new_article.html', {"form": form})
     
 
 def search_results(request):
@@ -141,8 +156,8 @@ def likes(request,id,Neighbour_id):
 @login_required(login_url='/accounts/login/') 
 def projects(request,id):
     user=request.user
-    projects=Neighbour.objects.all()
-    business=Business.objects.filter(id=id)
+    projects=Neighbour.objects.filter(id=id)
+
     buz=Business.objects.filter(user=user).first()
     all=Rates.objects.filter(project=id)  
     if request.method == 'POST':
@@ -152,30 +167,8 @@ def projects(request,id):
             rate.user = request.user
             rate.project =id
             rate.save()
-        return redirect('projects',id)
-        
+        return redirect('projects',id)       
     else:
         form = VotesForm() 
-    calcul=Rates.objects.filter(project=id)
-    usability=[]
-    design=[]
-    content=[]
-    aver_usability=0
-    aver_design=0
-    aver_content=0
-    for i in calcul:
-        usability.append(i.usability)
-        design.append(i.design)
-        content.append(i.content)
-
-        if len(usability)>0 or len(design)>0 or len(content)>0:
-            aver_usability+= round(sum(usability)/len(usability))
-            aver_design+= round(sum(design)/len(design))
-            aver_content+= round(sum(content)/len(content))
-        else:
-            aver_usability=0.0
-            aver_design=0.0
-            aver_content=0.0
-    
-    return render(request,'one_project.html',{"projects":projects,"all":all,"form":form,"usability":aver_usability,"design":aver_design,"content":aver_content,"buz":buz,"business":business})
+    return render(request,'one_project.html',{"projects":projects,"buz":buz})
 

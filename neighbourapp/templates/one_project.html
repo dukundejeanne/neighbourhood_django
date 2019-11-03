@@ -39,10 +39,10 @@
    
    
     <a href="{{images.link}}" class="btn btn-pink btn-md pull-right" target="_blank"><i class="far fa-chevron-double-right"></i></a>
-    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal">Add Business</button>
+    <button class="btn btn-outline-info" type="button" data-target="#votesform" data-toggle="modal"><a href="{%url 'new_image'%}">Add Business</a></button>
             <br>
            
-<!-- not typed -->
+
 <div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="modal-body mx-3">
                         <div class="form animated slideInDown">
-                                <form action="{% url 'projects' images.id %}" method="POST">
+                                <form action="{%url 'buz' images.id%}" method="POST">
                                         {% csrf_token %}
                                         {% bootstrap_form form %}
                                         <button class="btn btn-outline-info modal-footer d-flex justify-content-center" type="submit">Submit </button>
