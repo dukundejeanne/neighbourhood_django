@@ -5,8 +5,8 @@ Your Job is to create a web application that allows you to be in the loop about 
 Tag to create project:
 * mkdir awward_django create folder to hold all your application
 * cd awward_django 
-* django-admin startproject award . Tag to create a project application
-* django-admin startapp awardapp  tah to create the application
+* django-admin startproject neighbourhood . Tag to create a project application
+* django-admin startapp neighbourhoodapp  tah to create the application
 ## Prerequisites
 What things you need to install the software and how to install them
 install all this command in terminal pip
