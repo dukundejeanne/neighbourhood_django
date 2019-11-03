@@ -73,7 +73,7 @@ def add_business(request):
 @login_required(login_url='/accounts/login/')
 def profilemy(request,username=None):
     current_user=request.user
-    pictures=Neighbour.objects.filter(name=current_user)
+    pictures=Neighbour.objects.filter(location=current_user)
     busines=Business.objects.all()
     if not username:
         username=request.user.username
@@ -159,7 +159,7 @@ def projects(request,id):
     user=request.user
     projects=Neighbour.objects.filter(id=id)
 
-    buz=Business.objects.all()
+    buz=Business.objects.filter(location=id)
     all=Rates.objects.filter(project=id)  
     if request.method == 'POST':
         form = VotesForm(request.POST)
