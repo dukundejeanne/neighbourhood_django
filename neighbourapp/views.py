@@ -39,6 +39,7 @@ def home_images(request,):
 
 @login_required(login_url='/accounts/login/')
 def new_image(request):
+    business=Business.objects.all()
     current_user=request.user
     if request.method=='POST':
         form=BusinessForm(request.POST,request.FILES)
@@ -50,7 +51,7 @@ def new_image(request):
         return redirect('homePage')
     else:
         form=BusinessForm()
-    return render(request,'registration/new_image.html',{"form":form})
+    return render(request,'registration/new_image.html',{"form":form,"business":business})
 
 @login_required(login_url='/accounts/login/')
 def add_business(request):
@@ -73,7 +74,7 @@ def add_business(request):
 def profilemy(request,username=None):
     current_user=request.user
     pictures=Neighbour.objects.filter(name=current_user)
-    business=Business.objects.filter(owner=current_user).all()
+    business=Business.objects.all()
     if not username:
         username=request.user.username
         images=Neighbour.objects.filter(name=username)

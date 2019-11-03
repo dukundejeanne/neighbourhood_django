@@ -23,8 +23,11 @@
 <br>
 <body>
         <div>
-                        <p class="title">{{images.location}}</p>
+                        <p class="title" style="text-align: center;">{{images.location}}</p>
         </div>
+        <br>
+        <br>
+        <hr>
     <div class="row" style="margin-left: 20%;">
         
         <div class="col-md-3" >
@@ -43,7 +46,7 @@
             <br>
            
 
-<div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="votesform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
         <div class="modal-content">
                 <div class="modal-header text-center">
@@ -61,8 +64,10 @@
                 </div>
  </div>
 </div>
+</div> -->
 </div>
-</div>
+
+
 
 {% endfor %}
 </div>
@@ -71,10 +76,13 @@
 </div>
 </div>
 <div>
+ 
         {% for ones in business %}
-        <p>{{ones.name}}</p>
+        <p>{{ones.owner}}</p>
         <p>{{ones.location}}</p>
         {% endfor %}
+       
+
 
 </div>
 </body>
