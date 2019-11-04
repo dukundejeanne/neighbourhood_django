@@ -5,7 +5,7 @@ from django.test import TestCase
 
 # Create your tests here.
 from django.test import TestCase
-from .models import Neighbour,User,Profile,Comment
+from .models import Neighbour,User,Profile
 import datetime as dt
 
 class ImageTestClass(TestCase):
@@ -18,7 +18,7 @@ class ImageTestClass(TestCase):
         self.user1.save()
         
         
-        self.image=Neighbour(title='leaves',description='beautiful',user=self.user1,likes="1",post="image")
+        self.image=Neighbour(name='leaves',location='beautiful',user=self.user1,count="1")
         self.image.save_image()
 
  
@@ -95,7 +95,7 @@ class ProfileTestClass(TestCase):
         self.user1.save()
         # self.image=Profile(name='leaves',description='beautiful',user=self.user1,likes="1",post="image")
         # self.image.save_image()
-        self.nature=Profile(2,user=self.user1,bio='Nature')
+        self.nature=Profile(2,user=self.user1,name='Nature',email="dukunde@gmail.com")
         self.nature.save_prof()
 
  
